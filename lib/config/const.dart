@@ -15,5 +15,5 @@ class ConstKey {
   /**
    * 标题
    */
-  static const title = "Flutter Demo";
+  static const title = "拼少少";
 }

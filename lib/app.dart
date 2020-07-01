@@ -3,7 +3,9 @@ import 'package:learn_flutter/views/abouts.dart';
 import 'package:learn_flutter/views/home.dart';
 import 'package:learn_flutter/views/product.dart';
 import 'package:learn_flutter/views/lists.dart';
-
+import 'package:learn_flutter/views/my.dart';
+import 'package:learn_flutter/views/shopCar.dart';
+/*这个app.dart控制的是主页面.*/
 import 'config/const.dart';
 
 class Application extends StatefulWidget {
@@ -19,8 +21,11 @@ class ApplicationState extends State<Application> {
   List<Widget> PageViews = [
     HomeViews(),
     ProductViews(),
-    ListDemoViews(),
+//    ListDemoViews(),
     AboutDemoViews(),
+    myViews3(),
+    myViews2(),
+
   ];
 
   int _currentIndex = 3;
@@ -44,7 +49,7 @@ class ApplicationState extends State<Application> {
         elevation: 8,
       ),
       bottomNavigationBar: BottomNavigationBar(
-        onTap: (int index) {
+        onTap: (int index) { // 这个来控制这些按钮的相应.
           changeBottomBar(index);
         },
         type: BottomNavigationBarType.fixed,
@@ -58,14 +63,23 @@ class ApplicationState extends State<Application> {
             icon: Icon(Icons.business),
             title: Text('产品'),
           ),
+//          BottomNavigationBarItem(
+//            icon: Icon(Icons.school),
+//            title: Text('列表展示'),
+//          ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.school),
-            title: Text('列表展示'),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.account_box),
+            icon: Icon(Icons.system_update),
             title: Text('关于我们'),
           ),
+
+
+          BottomNavigationBarItem(
+            icon: Icon(Icons.add_shopping_cart),
+            title: Text('购物车'),
+          ),
+    BottomNavigationBarItem(
+    icon: Icon(Icons.account_box),
+    title: Text('我的')),
         ]
       ),
       body: _currentPage()
