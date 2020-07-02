@@ -5,8 +5,26 @@ import 'package:learn_flutter/views/product.dart';
 import 'package:learn_flutter/views/lists.dart';
 import 'package:learn_flutter/views/my.dart';
 import 'package:learn_flutter/views/shopCar.dart';
-/*这个app.dart控制的是主页面.*/
+import 'package:provider/provider.dart';
+/*这个app.dart控制的是主页面.*/              //所以把变量都存这里面.
 import 'config/const.dart';
+
+
+
+//数据model也放这里.
+class MyModel with ChangeNotifier{
+  //                                               <--- MyModel
+  MyModel({this.counter = 0});
+
+  int counter = 0;
+
+  incrementCounter()  {
+
+    counter++;
+    print(counter);
+    notifyListeners();
+  }
+}
 
 class Application extends StatefulWidget {
   @override
@@ -43,7 +61,12 @@ class ApplicationState extends State<Application> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return ChangeNotifierProvider(
+        create: (_) => MyModel(), // 这里面写所有被监听的全局变量.
+
+
+
+    child:Scaffold(
       appBar: AppBar(
         title: Text(ConstKey.title),
         elevation: 8,
@@ -83,7 +106,7 @@ class ApplicationState extends State<Application> {
         ]
       ),
       body: _currentPage()
-    );
+    ));
   }
 
 }
