@@ -1,4 +1,4 @@
-
+// 最后一个界面,我的,负责控制登录,和记录账号信息.
 import 'package:flustars/flustars.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

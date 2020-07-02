@@ -11,7 +11,7 @@ import 'config/const.dart';
 
 
 
-//数据model也放这里.
+//数据model也放这里. 因为model是全局变量.所有页面都共享,app是所有的父页面.放这里逻辑就正确.
 class MyModel with ChangeNotifier{
   //                                               <--- MyModel
   MyModel({this.counter = 0});
@@ -26,6 +26,9 @@ class MyModel with ChangeNotifier{
   }
 }
 
+
+
+// 下面就是页面.
 class Application extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
@@ -61,8 +64,11 @@ class ApplicationState extends State<Application> {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-        create: (_) => MyModel(), // 这里面写所有被监听的全局变量. 只有重启app,才会重新初始化这里面的数值.
+    return MultiProvider(
+        providers: [
+          ChangeNotifierProvider<MyModel>(create: (context) => MyModel()),
+          ChangeNotifierProvider<MyModel>(create: (context) => MyModel()),
+        ],
 
 
 

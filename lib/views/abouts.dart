@@ -58,7 +58,7 @@ var tel='15122306087';
                       fontWeight: FontWeight.w600
                     ),
                   ),
-                  description: Text("飞鸿互联网科技电话\n"+tel,textAlign:TextAlign.center ,style: TextStyle(fontSize: 13),),
+                  description: Text("xx互联网科技电话\n"+tel,textAlign:TextAlign.center ,style: TextStyle(fontSize: 13),),
                   onlyOkButton: true, // 一般true,只需要一个ok按钮就狗了.
                   buttonOkText: Text("退出"),
                   entryAnimation: EntryAnimation.DEFAULT,
@@ -88,7 +88,7 @@ var tel='15122306087';
                       fontWeight: FontWeight.w600
                   ),
                 ),
-                description: Text("飞鸿互联网科技成立于2020年6月.经营范围：web开发,app开发,人工智能,大数据服务等\n",textAlign:TextAlign.start ,style: TextStyle(fontSize: 13),),
+                description: Text("xx互联网科技成立于2020年6月.经营范围：web开发,app开发,人工智能,大数据服务等\n",textAlign:TextAlign.start ,style: TextStyle(fontSize: 13),),
                 onlyOkButton: true, // 一般true,只需要一个ok按钮就狗了.
                 buttonOkText: Text("退出"),
                 entryAnimation: EntryAnimation.DEFAULT,
