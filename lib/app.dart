@@ -62,7 +62,7 @@ class ApplicationState extends State<Application> {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-        create: (_) => MyModel(), // 这里面写所有被监听的全局变量.
+        create: (_) => MyModel(), // 这里面写所有被监听的全局变量. 只有重启app,才会重新初始化这里面的数值.
 
 
 
