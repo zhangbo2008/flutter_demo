@@ -1,4 +1,5 @@
 //首页就是我们商城,用户购买物品. 里面都有一个添加按钮,用于添加物品.点完之后购物车中对应物品加1
+//这个就是商城的购买区.
 import 'package:flutter/material.dart';
 import 'package:learn_flutter/api/home.dart';
 import 'package:learn_flutter/components/bannerIndex.dart';

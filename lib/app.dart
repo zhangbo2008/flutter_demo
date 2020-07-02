@@ -90,7 +90,7 @@ class ApplicationState extends State<Application> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.business),
-            title: Text('产品'),
+            title: Text('段子'),
           ),
 //          BottomNavigationBarItem(
 //            icon: Icon(Icons.school),

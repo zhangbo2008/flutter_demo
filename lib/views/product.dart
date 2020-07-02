@@ -1,4 +1,4 @@
-
+// 目前是一些段子区, 用api获取有趣文本.
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_html/style.dart';

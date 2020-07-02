@@ -25,12 +25,17 @@ class DouBanIndexComponent extends StatelessWidget {
   }
 
   Widget _dataList(context, List lists) {
+    print('看看数据');
+    print(lists);
     var _w = ScreenUtil.getScreenW(context);
     var itemW = _w * 168.5 / 360;
-    List<Widget> listWrap = lists.map((item){
-      return GestureDetector(
+    List<Widget> listWrap = lists.map((item){ // 把每一个item 放入后面的函数中.得到一个迭代器.
+      // 后面这个函数是匿名函数, 入参item 出餐是{return xxxxxx}
+      return GestureDetector(  // 购买跳转在这里!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!---------------
         onTap: () {
-          Navigator.of(context).push(
+//          这个函数表示点击下面child时候会触发这个tap函数.
+
+          Navigator.of(context).push( //路由跳转到.  CatDetailPage(item: item) 这个. //并且用的是page内部跳转.
             MaterialPageRoute(builder: (ctx) {
               return CatDetailPage(item: item);
             })
@@ -83,32 +88,6 @@ class DouBanIndexComponent extends StatelessWidget {
                   ]
                 ),
                 ),
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             ],
           )
         ),

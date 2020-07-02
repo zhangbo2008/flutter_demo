@@ -31,16 +31,26 @@ class CatDetailPageState extends State<CatDetailPage> {
       appBar: AppBar(
         title: Text("详情页"),
       ),
-      body: Container(
+
+
+      body:
+
+      Container(
+      child:
+
+
+      Container(
         child: ListView(
+//          physics: new NeverScrollableScrollPhysics(),
           children: <Widget>[
             Container(
-              height: 340,
+              height: 1000, //让滑动
+
               child: Image.network(
                 item['info']['imgurl']
               ),
               decoration: BoxDecoration(
-                color: Colors.yellow[100]
+                color: Colors.yellow[50]
               ),
               padding: EdgeInsets.all(24),
             ),
@@ -52,14 +62,21 @@ class CatDetailPageState extends State<CatDetailPage> {
                   color: Theme.of(context).accentColor
                 )
               ),
-              margin: EdgeInsets.all(12),
+              margin: EdgeInsets.fromLTRB(12,12,12,12),
             ),
             Text(
               item['info']['yanyuan']
-            )
+            ),
+
           ],
+
+
+
         ),
-      ),
+
+
+
+      ),)
     );
   }
 
