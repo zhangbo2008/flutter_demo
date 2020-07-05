@@ -38,7 +38,7 @@ dependencies:
   giffy_dialog: 1.7.0
   url_launcher: 5.4.11
   provider: 4.1.2  # 注意版本要对应好.
-
+  pull_to_refresh: ^1.1.5    # 列表下拉刷新.
 dev_dependencies:
   flutter_test:
     sdk: flutter

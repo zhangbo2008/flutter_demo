@@ -33,6 +33,7 @@ class HomeViewsState extends State<HomeViews> {
     });
   }
 
+
   @override
   initState() {           // 页面首先获取数据放在initState方法里面.
     getBanner();
