@@ -10,7 +10,7 @@ import 'package:provider/provider.dart';
 /*这个app.dart控制的是主页面.*/              //所以把变量都存这里面.
 import 'config/const.dart';
 
-
+//非常重要的技术, 是用  IndexedStack 实现.
 
 //数据model也放这里. 因为model是全局变量.所有页面都共享,app是所有的父页面.放这里逻辑就正确.
 class MyModel with ChangeNotifier{
@@ -95,9 +95,9 @@ class ApplicationState extends State<Application> with AutomaticKeepAliveClientM
       Scaffold(
 
 
-          body: IndexedStack(    // 通过这个来提供返回页面, 设置index 和children即可, 就会返回childern[index]
-            index: _currentIndex,  //设置好每次点击按钮, index 更新.
-            children: PageViews, //设置好所有的页面组成的list即可.
+          body: IndexedStack(
+            index: _currentIndex,
+            children: PageViews,
           ),
 
       appBar: AppBar(

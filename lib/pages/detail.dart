@@ -182,11 +182,22 @@ var a=1;
 
     Container(
 
-    padding: EdgeInsets.fromLTRB(40,10,10,10,), //设置空间的位置.
+    padding: EdgeInsets.fromLTRB(50,10,10,10,), //设置空间的位置.
     child: Row(
-//        crossAxisAlignment: CrossAxisAlignment.stretch,
-crossAxisAlignment: CrossAxisAlignment.start,
-    children: <Widget>[
+        children: <Widget>[
+
+//
+//        Container(
+//    color: Colors.red,
+//    padding: EdgeInsets.all(5.0),
+//    )
+
+
+
+
+
+
+
 //
 //      Container(
 //        width: 10,
@@ -206,36 +217,53 @@ crossAxisAlignment: CrossAxisAlignment.start,
 //        );
 //      }),
 
-      Consumer<MyModel>( //写一个button
+//      Consumer<MyModel>( //写一个button
+//
+//          builder: (context, model, child) {
+//            return FloatingActionButton(
+//                onPressed: (){print(item['title']);model.addproduct(item['title']);},
+//                child: Text("购物车")
+//            );
+//          }),
 
-          builder: (context, model, child) {
-            return FloatingActionButton(
+
+
+
+
+
+
+
+
+
+
+
+              Consumer<MyModel>(
+              builder: (context, model, child) {
+                return FlatButton(
+
+                    color: Colors.tealAccent,
+                    onPressed:(){Navigator.of(context).pushReplacementNamed("cart");},
+                    child:  Text("购物车"));
+              },
+            )
+
+, SizedBox(width: 120,),  // 这个是padding 组件,用来拉开组件之间的距离
+
+          Consumer<MyModel>( //写一个button
+
+              builder: (context, model, child) {
+                return FloatingActionButton( //FloatingActionButton 这个东西要少用,貌似一行只能用1个.写多了,页面渲染不了.
 
 // onPressed 里面输入一个void callback, 所以他不能直接写函数.需要把盗用的写{}里面就行了.
-                onPressed: (){print(item['title']);model.addproduct(item['title']);},
-                child: Text("购物车")
+                    onPressed: (){print(item['title']);model.addproduct(item['title']);},
+                    child: Text("购买")
 
-            );
+                );
 
-          }),
+              })
 
+          ,
 
-
-      SizedBox(width: 120,),  // 这个是padding 组件,用来拉开组件之间的距离
-      Consumer<MyModel>( //写一个button
-
-          builder: (context, model, child) {
-            return FloatingActionButton(
-
-// onPressed 里面输入一个void callback, 所以他不能直接写函数.需要把盗用的写{}里面就行了.
-                onPressed: (){print(item['title']);model.addproduct(item['title']);},
-                child: Text("购买")
-
-            );
-
-          })
-
-,
 
 
 

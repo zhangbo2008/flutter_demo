@@ -41,7 +41,7 @@ class MyHomePage extends StatelessWidget {
     return
       Scaffold(
         appBar: AppBar(
-          title: Text('provider'),
+          title: Text('购物车'),
         ),
         body: Column(
           children: <Widget>[
@@ -70,15 +70,53 @@ class MyHomePage extends StatelessWidget {
                 );
               },
             ),
-//            Consumer<MyModel>(
-//              builder: (context, model, child) {
-//                return FlatButton(
-//
-//                    color: Colors.tealAccent,
-//                    onPressed: model.incrementCounter,
-//                    child: Icon(Icons.add));
-//              },
-//            ),
+            Consumer<MyModel>(
+              builder: (context, model, child) {
+                return FlatButton(
+
+                    color: Colors.tealAccent,
+                    onPressed: model.incrementCounter,
+                    child: Icon(Icons.add));
+              },
+            ),
+
+
+            Consumer<MyModel>(
+              builder: (context, model, child) {
+                return FlatButton(
+
+                    color: Colors.tealAccent,
+                    onPressed: model.incrementCounter,
+                    child: Icon(Icons.add));
+              },
+            ),
+            Row(
+              children: <Widget>[ Consumer<MyModel>(
+                builder: (context, model, child) {
+                  return FlatButton(
+
+                      color: Colors.tealAccent,
+                      onPressed: model.incrementCounter,
+                      child: Icon(Icons.add));
+                },
+              ), Consumer<MyModel>(
+                builder: (context, model, child) {
+                  return FlatButton(
+
+                      color: Colors.tealAccent,
+                      onPressed: model.incrementCounter,
+                      child: Icon(Icons.add));
+                },
+              ),],
+
+
+            )
+
+
+
+
+
+
           ],
         ),
 

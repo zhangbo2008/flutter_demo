@@ -13,7 +13,7 @@ class HomeViews extends StatefulWidget {
 
 }
 
-class HomeViewsState extends State<HomeViews> {
+class HomeViewsState extends State<HomeViews> with AutomaticKeepAliveClientMixin{
 
   List<String> _banners = [];
   List _lists = [];
@@ -43,6 +43,7 @@ class HomeViewsState extends State<HomeViews> {
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);//要点3
     return Container(
       child: ListView(
         children: <Widget>[
@@ -56,5 +57,9 @@ class HomeViewsState extends State<HomeViews> {
       ),
     );
   }
+
+  @override
+  // TODO: implement wantKeepAlive
+  bool get wantKeepAlive => true;//要点2
 
 }

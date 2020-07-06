@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:learn_flutter/views/shopCar.dart';
 import 'package:provider/provider.dart';
 
 import 'app.dart';
@@ -20,7 +21,8 @@ class MainApp extends StatelessWidget {
       debugShowCheckedModeBanner: false, // 设置这一属性即可
       routes: <String, WidgetBuilder>{ //静态路由表, 这些东西全局软件都可以直接调用.   Navigator.of(context).pushReplacementNamed("app");   静态路由没法传参数.
         "/": (BuildContext ctx)=> LoadingWrapper(),
-        "app": (BuildContext ctx)=> Application()
+        "app": (BuildContext ctx)=> Application(),
+        "cart":(BuildContext ctx)=> myViews3()
       },
     ));
     ;
