@@ -14,8 +14,16 @@ class myViews3 extends StatefulWidget {
   State<StatefulWidget> createState() {
     return AboutDemoViewsState();
   }
-
 }
+
+
+
+
+
+
+
+
+
 
 class AboutDemoViewsState extends State<myViews3> {
 
@@ -49,7 +57,7 @@ class MyHomePage extends StatelessWidget {
                     child: Text('当前是：${_model.counter}'));
               },
             ),
-            Consumer<MyModel>(
+            Consumer<MyModel>(// 把相应好的东西协商去即可!!!!!!!!!!!
               builder: (context, model, child) {
                 return Container(
                   margin: const EdgeInsets.only(top: 20),
@@ -57,20 +65,20 @@ class MyHomePage extends StatelessWidget {
                   padding: const EdgeInsets.all(20),
                   alignment: Alignment.center,
                   color: Colors.lightGreen,
-                  child: Text(
-                    '${model.counter}',
-                  ),
+                  child: model.product.isNotEmpty ?  Text( '${model.product}'):Text( '购物车为空')
+
                 );
               },
             ),
-            Consumer<MyModel>(
-              builder: (context, model, child) {
-                return FlatButton(
-                    color: Colors.tealAccent,
-                    onPressed: model.incrementCounter,
-                    child: Icon(Icons.add));
-              },
-            ),
+//            Consumer<MyModel>(
+//              builder: (context, model, child) {
+//                return FlatButton(
+//
+//                    color: Colors.tealAccent,
+//                    onPressed: model.incrementCounter,
+//                    child: Icon(Icons.add));
+//              },
+//            ),
           ],
         ),
 

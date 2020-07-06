@@ -2,6 +2,7 @@
 import 'package:flustars/flustars.dart';
 import 'package:flutter/material.dart';
 import 'package:learn_flutter/pages/detail.dart';
+import 'package:learn_flutter/views/my_page.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 

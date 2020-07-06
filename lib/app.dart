@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:learn_flutter/views/abouts.dart';
 import 'package:learn_flutter/views/home.dart';
 import 'package:learn_flutter/views/product.dart';
+import 'package:learn_flutter/views/my_page.dart'; // 这个页面用于测试.
 import 'package:learn_flutter/views/lists.dart';
 import 'package:learn_flutter/views/my.dart';
 import 'package:learn_flutter/views/shopCar.dart';
@@ -24,6 +25,30 @@ class MyModel with ChangeNotifier{
     print(counter);
     notifyListeners();
   }
+
+  var product = Map<String,int >();
+
+
+   addproduct(String a) {
+     print(11111111111111111);
+     print(product.isEmpty);
+    print('你购买了');
+    if (!product.containsKey(a))
+    {product[a]=0;}
+    {product[a]+=1;}
+print('你购买了');
+print(a);
+
+      notifyListeners();
+
+  }
+
+
+
+
+
+
+
 }
 
 
@@ -43,13 +68,14 @@ class ApplicationState extends State<Application> {
     HomeViews(),
     ProductViews(),
 //    ListDemoViews(),
+
     AboutDemoViews(),
     myViews3(),
     myViews2(),
-
+//    MyPage(),
   ];
 
-  int _currentIndex = 3;
+  int _currentIndex = 0;
 
   Widget _currentPage() {
     return PageViews[_currentIndex];
@@ -64,15 +90,8 @@ class ApplicationState extends State<Application> {
 
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-        providers: [
-          ChangeNotifierProvider<MyModel>(create: (context) => MyModel()),
-          ChangeNotifierProvider<MyModel>(create: (context) => MyModel()),
-        ],
-
-
-
-    child:Scaffold(
+    return
+      Scaffold(
       appBar: AppBar(
         title: Text(ConstKey.title),
         elevation: 8,
@@ -96,6 +115,18 @@ class ApplicationState extends State<Application> {
 //            icon: Icon(Icons.school),
 //            title: Text('列表展示'),
 //          ),
+
+
+
+
+
+
+
+
+
+
+
+
           BottomNavigationBarItem(
             icon: Icon(Icons.system_update),
             title: Text('关于我们'),
@@ -109,10 +140,25 @@ class ApplicationState extends State<Application> {
     BottomNavigationBarItem(
     icon: Icon(Icons.account_box),
     title: Text('我的')),
+
+
+
+//
+//
+//          BottomNavigationBarItem(
+//            icon: Icon(Icons.add_shopping_cart),
+//            title: Text('测试'),
+//          ),
+
+
+
+
+
+
         ]
       ),
       body: _currentPage()
-    ));
+    );
   }
 
 }

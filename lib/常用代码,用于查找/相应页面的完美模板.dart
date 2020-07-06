@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'package:flutter/cupertino.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:provider/provider.dart';
 import 'package:provider/provider.dart';
@@ -182,62 +181,75 @@ var a=1;
 
     Container(
 
-    padding: EdgeInsets.fromLTRB(40,10,10,10,), //设置空间的位置.
-    child: Row(
-//        crossAxisAlignment: CrossAxisAlignment.stretch,
-crossAxisAlignment: CrossAxisAlignment.start,
+    padding: EdgeInsets.fromLTRB(200,10,10,10,), //设置空间的位置.
+    child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+
     children: <Widget>[
+
+//      Text('fdsafasd')
 //
-//      Container(
-//        width: 10,
-//        height: 10,
-//        color: Colors.red,
+//      ,
+
+//           FloatingActionButton(
+//
+//
+//              onPressed:(){},
+//              child: Text("购买"))
+
+
+
+/*
+*
+*
+*
+* 因为detail 是一个新的页面, shopCar是app的子页面 app里面有MultiProvider ,所以detail里面需要
+*  也写一个.ChangeNotifierProvider(
+      builder: (context) => _counterProvider,
+      child: 这个结构,才能让电脑知道回复的页面是一个带相应机制的.
+*
+* */
+
+
+
+
+      Consumer<MyModel>( //写一个button
+
+        builder: (context, model, child) {
+          return FloatingActionButton(
+
+// onPressed 里面输入一个void callback, 所以他不能直接写函数.需要把盗用的写{}里面就行了.
+              onPressed: (){print(item['title']);model.addproduct(item['title']);},
+              child: Text("购买")
+
+          );
+
+        })
+
+
+
+
+
+
+
+
+
+
+
+//      Consumer<MyModel>(
+//        builder: (context, model, child) {
+//          return Container(
+//            margin: const EdgeInsets.only(top: 20),
+//            width: MediaQuery.of(context).size.width,
+//            padding: const EdgeInsets.all(20),
+//            alignment: Alignment.center,
+//            color: Colors.lightGreen,
+//            child: Text(
+//              '${model.counter}',
+//            ),
+//          );
+//        },
 //      ),
-
-
-//      Consumer(builder: (BuildContext context,
-//          model, Widget child) {
-//        print('Text1重绘了。。。。。。');
-//
-//        return Text(
-//          //获取数据
-//          'Text1 : ${model.value}',
-//          style: TextStyle(fontSize: 20),
-//        );
-//      }),
-
-      Consumer<MyModel>( //写一个button
-
-          builder: (context, model, child) {
-            return FloatingActionButton(
-
-// onPressed 里面输入一个void callback, 所以他不能直接写函数.需要把盗用的写{}里面就行了.
-                onPressed: (){print(item['title']);model.addproduct(item['title']);},
-                child: Text("购物车")
-
-            );
-
-          }),
-
-
-
-      SizedBox(width: 120,),  // 这个是padding 组件,用来拉开组件之间的距离
-      Consumer<MyModel>( //写一个button
-
-          builder: (context, model, child) {
-            return FloatingActionButton(
-
-// onPressed 里面输入一个void callback, 所以他不能直接写函数.需要把盗用的写{}里面就行了.
-                onPressed: (){print(item['title']);model.addproduct(item['title']);},
-                child: Text("购买")
-
-            );
-
-          })
-
-,
-
-
 
       ]))
 

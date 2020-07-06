@@ -182,7 +182,7 @@ var a=1;
 
     Container(
 
-    padding: EdgeInsets.fromLTRB(40,10,10,10,), //设置空间的位置.
+    padding: EdgeInsets.fromLTRB(200,10,10,10,), //设置空间的位置.
     child: Row(
 //        crossAxisAlignment: CrossAxisAlignment.stretch,
 crossAxisAlignment: CrossAxisAlignment.start,
@@ -221,7 +221,7 @@ crossAxisAlignment: CrossAxisAlignment.start,
 
 
 
-      SizedBox(width: 120,),  // 这个是padding 组件,用来拉开组件之间的距离
+      SizedBox(width: 20,),  // 这个是padding 组件,用来拉开组件之间的距离
       Consumer<MyModel>( //写一个button
 
           builder: (context, model, child) {

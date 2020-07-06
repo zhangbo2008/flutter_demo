@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'package:flutter/cupertino.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:provider/provider.dart';
 import 'package:provider/provider.dart';
@@ -8,30 +7,6 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 
 import '../app.dart';
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // 好像应该用stateless
 class CatDetailPage extends StatefulWidget {
 
@@ -74,13 +49,7 @@ var a=1;
   }
   @override
   Widget build(BuildContext context) {
-    return      // 这个地方应该用Notification报一下.
-
-//        ChangeNotifierProvider<MyModel>( create: (context) => MyModel(),
-//    child:
-
-
-    Scaffold(
+    return Scaffold(
       appBar: AppBar(
         title: Text("详情页"),
       ),
@@ -182,62 +151,55 @@ var a=1;
 
     Container(
 
-    padding: EdgeInsets.fromLTRB(40,10,10,10,), //设置空间的位置.
-    child: Row(
-//        crossAxisAlignment: CrossAxisAlignment.stretch,
-crossAxisAlignment: CrossAxisAlignment.start,
+    padding: EdgeInsets.fromLTRB(200,10,10,10,), //设置空间的位置.
+    child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+
     children: <Widget>[
+
+      Text('fdsafasd')
+
+      ,
+
+           FloatingActionButton(
+
+
+              onPressed:(){},
+              child: Text("购买"))
+
+
+
+
+
+
+
+
+//      Consumer<MyModel>( //写一个button
+//        builder: (context, model, child) {
+//          return FloatingActionButton(
 //
-//      Container(
-//        width: 10,
-//        height: 10,
-//        color: Colors.red,
+//
+//              onPressed: model.addproduct('a'),
+//              child: Text("购买")
+//
+//          );
+//
+//        })
+
+//      Consumer<MyModel>(
+//        builder: (context, model, child) {
+//          return Container(
+//            margin: const EdgeInsets.only(top: 20),
+//            width: MediaQuery.of(context).size.width,
+//            padding: const EdgeInsets.all(20),
+//            alignment: Alignment.center,
+//            color: Colors.lightGreen,
+//            child: Text(
+//              '${model.counter}',
+//            ),
+//          );
+//        },
 //      ),
-
-
-//      Consumer(builder: (BuildContext context,
-//          model, Widget child) {
-//        print('Text1重绘了。。。。。。');
-//
-//        return Text(
-//          //获取数据
-//          'Text1 : ${model.value}',
-//          style: TextStyle(fontSize: 20),
-//        );
-//      }),
-
-      Consumer<MyModel>( //写一个button
-
-          builder: (context, model, child) {
-            return FloatingActionButton(
-
-// onPressed 里面输入一个void callback, 所以他不能直接写函数.需要把盗用的写{}里面就行了.
-                onPressed: (){print(item['title']);model.addproduct(item['title']);},
-                child: Text("购物车")
-
-            );
-
-          }),
-
-
-
-      SizedBox(width: 120,),  // 这个是padding 组件,用来拉开组件之间的距离
-      Consumer<MyModel>( //写一个button
-
-          builder: (context, model, child) {
-            return FloatingActionButton(
-
-// onPressed 里面输入一个void callback, 所以他不能直接写函数.需要把盗用的写{}里面就行了.
-                onPressed: (){print(item['title']);model.addproduct(item['title']);},
-                child: Text("购买")
-
-            );
-
-          })
-
-,
-
-
 
       ]))
 
