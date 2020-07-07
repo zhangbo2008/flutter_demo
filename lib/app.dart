@@ -1,15 +1,17 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:learn_flutter/views/abouts.dart';
 import 'package:learn_flutter/views/home.dart';
 import 'package:learn_flutter/views/product.dart';
-import 'package:learn_flutter/views/my_page.dart'; // 这个页面用于测试.
+//import 'package:learn_flutter/views/my_page.dart'; // 这个页面用于测试.
 import 'package:learn_flutter/views/lists.dart';
 import 'package:learn_flutter/views/my.dart';
 import 'package:learn_flutter/views/shopCar.dart';
 import 'package:provider/provider.dart';
 /*这个app.dart控制的是主页面.*/              //所以把变量都存这里面.
 import 'config/const.dart';
-
+import 'package:flutter/services.dart';
 
 
 //数据model也放这里. 因为model是全局变量.所有页面都共享,app是所有的父页面.放这里逻辑就正确.
@@ -87,11 +89,63 @@ class ApplicationState extends State<Application> with AutomaticKeepAliveClientM
       _currentIndex = index;
     });
   }
+  DateTime lastPopTime;
+
+
+
+
+
+
+
+
+  _backDeskTop() async {
+    //初始化通信管道-设置退出到手机桌面
+    String CHANNEL = "android/back/desktop";
+    final platform = MethodChannel(CHANNEL);
+    //通知安卓返回,到手机桌面
+    try {
+      final bool out = await platform.invokeMethod('backDesktop');
+      if (out) debugPrint('返回到桌面');
+    } on PlatformException catch (e) {
+      debugPrint("通信失败(设置回退到安卓手机桌面:设置失败)");
+      print(e.toString());
+    }
+    return Future.value(false);
+  }
+
+
+
+
+
 
   @override
   Widget build(BuildContext context) {
     super.build(context);//要点3
-    return
+    return  WillPopScope(   // 监听退出时间,让用户无法点击按钮就直接退出.
+        onWillPop: () async {
+          //真正的退出写这里.
+      if(lastPopTime == null || DateTime.now().difference(lastPopTime) > Duration(seconds: 2)){
+        lastPopTime = DateTime.now();
+       //如果大于2s 就更新
+      }else{
+        lastPopTime = DateTime.now();
+        // 退出app
+//        await SystemChannels.platform.invokeMethod('SystemNavigator.pop');
+print("diaoyong le ma ?");
+      _backDeskTop();
+//        Navigator.popUntil(context, ModalRoute.withName('/'));
+//return true;
+      }
+
+
+
+
+    },
+
+
+
+
+        child:
       Scaffold(
 
 
@@ -166,7 +220,7 @@ class ApplicationState extends State<Application> with AutomaticKeepAliveClientM
         ]
       ),
 
-    );
+    ));
   }
 
   @override
