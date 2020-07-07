@@ -263,23 +263,6 @@ var a=1;
 
                     //做动画.
 
-                    Function callback ;
-                    setState(() {
-                      OverlayEntry entry = OverlayEntry(
-                          builder: (ctx){
-                            return ParabolaAnimateWidget(rootKey,temp,floatOffset,
-                              Icon(Icons.cancel,color: Colors.greenAccent,),callback,);
-                          }
-                      );
-
-                      callback = (status){
-                        if(status == AnimationStatus.completed){
-                          entry?.remove();
-                        }
-                      };
-
-                      Overlay.of(rootKey.currentContext).insert(entry);
-                    });
 
 
 
