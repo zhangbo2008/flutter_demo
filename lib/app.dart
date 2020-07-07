@@ -132,7 +132,7 @@ class ApplicationState extends State<Application> with AutomaticKeepAliveClientM
         // 退出app
 //        await SystemChannels.platform.invokeMethod('SystemNavigator.pop');
 print("diaoyong le ma ?");
-      _backDeskTop();
+//      _backDeskTop();
 //        Navigator.popUntil(context, ModalRoute.withName('/'));
 //return true;
       }

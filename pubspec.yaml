@@ -24,7 +24,7 @@ dependencies:
   flutter:
     sdk: flutter
 
-
+  add_cart_parabola: ^0.0.3  # 将widget以抛物线的形式从a点移动到b点
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.3  # 提供图标

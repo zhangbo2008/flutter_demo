@@ -9,7 +9,11 @@ import 'package:flutter/material.dart';
 
 import '../app.dart';
 
+import 'dart:ui';
 
+
+import 'package:add_cart_parabola/add_cart_parabola.dart';
+import 'package:flutter/material.dart';
 
 
 
@@ -255,7 +259,34 @@ var a=1;
                 return FloatingActionButton( //FloatingActionButton 这个东西要少用,貌似一行只能用1个.写多了,页面渲染不了.
 
 // onPressed 里面输入一个void callback, 所以他不能直接写函数.需要把盗用的写{}里面就行了.
-                    onPressed: (){print(item['title']);model.addproduct(item['title']);},
+                    onPressed: (){print(item['title']);model.addproduct(item['title']);
+
+                    //做动画.
+
+                    Function callback ;
+                    setState(() {
+                      OverlayEntry entry = OverlayEntry(
+                          builder: (ctx){
+                            return ParabolaAnimateWidget(rootKey,temp,floatOffset,
+                              Icon(Icons.cancel,color: Colors.greenAccent,),callback,);
+                          }
+                      );
+
+                      callback = (status){
+                        if(status == AnimationStatus.completed){
+                          entry?.remove();
+                        }
+                      };
+
+                      Overlay.of(rootKey.currentContext).insert(entry);
+                    });
+
+
+
+
+
+
+                    },
                     child: Text("购买")
 
                 );
