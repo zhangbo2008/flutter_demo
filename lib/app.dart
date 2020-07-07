@@ -59,6 +59,7 @@ print(a);
 class Application extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
+
     return ApplicationState();
   }
 
@@ -76,7 +77,7 @@ class ApplicationState extends State<Application> with AutomaticKeepAliveClientM
     myViews2(),
 //    MyPage(),
   ];
-
+int cur1=0;
   int _currentIndex = 0;
 
   Widget _currentPage() {
@@ -114,7 +115,18 @@ class ApplicationState extends State<Application> with AutomaticKeepAliveClientM
   }
 
 
-
+  SelectView(IconData icon, String text, String id) {
+    return new PopupMenuItem<String>(
+        value: id,
+        child: new Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: <Widget>[
+            new Icon(icon, color: Colors.blue),
+            new Text(text),
+          ],
+        )
+    );
+  }
 
 
 
@@ -155,9 +167,39 @@ print("diaoyong le ma ?");
           ),
 
       appBar: AppBar(
+
+        actions: <Widget>[
+          // 非隐藏的菜单
+
+          // 隐藏的菜单
+          new PopupMenuButton<String>(
+            itemBuilder: (BuildContext context) => <PopupMenuItem<String>>[
+              this.SelectView(Icons.message, '发起群聊', 'A'),
+              this.SelectView(Icons.group_add, '添加服务', 'B'),
+              this.SelectView(Icons.cast_connected, '扫一扫码', 'C'),
+            ],
+            onSelected: (String action) {
+              // 点击选项的时候
+              switch (action) {
+                case 'A': break;
+                case 'B': break;
+                case 'C': break;
+              }
+            },
+          ),
+        ],
+        leading: new Icon(Icons.home),
+
+          toolbarOpacity:0.7 ,
+//        leading:  ,
         title: Text(ConstKey.title),
-        elevation: 8,
+        elevation: 0,
       ),
+
+
+
+
+
       bottomNavigationBar: BottomNavigationBar(
         onTap: (int index) { // 这个来控制这些按钮的相应.
           changeBottomBar(index);

@@ -49,6 +49,16 @@ class HomeViewsState extends State<HomeViews> with AutomaticKeepAliveClientMixin
         children: <Widget>[
           BannerIndexSwiper(  //自己定义的组件.轮播器
             banners: _banners,
+
+
+
+
+
+
+
+
+
+
           ),
           DouBanIndexComponent(
             lists: _lists,

@@ -40,9 +40,9 @@ class MyHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return
       Scaffold(
-        appBar: AppBar(
-          title: Text('购物车'),
-        ),
+//        appBar: AppBar(
+//          title: Text('购物车'),
+//        ),
         body: Column(
           children: <Widget>[
             Builder(

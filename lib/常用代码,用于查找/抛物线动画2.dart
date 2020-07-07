@@ -113,6 +113,18 @@ class _MyHomePageState extends State<MyHomePage> {
         setState(() {
           OverlayEntry entry = OverlayEntry(
               builder: (ctx){
+//                RenderBox renderBox = itemKey.currentContext.findRenderObject();
+//                Offset itemOffset = renderBox.localToGlobal(Offset.zero,
+//                    ancestor: rootKey.currentContext.findRenderObject());
+//                print("item offset  :${itemOffset.toString()}    float offset"
+//                    " ${floatOffset.toString()}");
+                /// root key：根widget key， 主要用于定位
+                /// temp:点击坐标，开始位置。floatOffset 结束坐标
+                ///Icon：传入想弹出的widget
+                ///call back: 会回传一个动画执行状态
+                ///duration： 动画时间 可选，默认1秒
+                ///
+
                 return ParabolaAnimateWidget(rootKey,temp,floatOffset,
                     Icon(Icons.cancel,color: Colors.greenAccent,),callback,);
               }

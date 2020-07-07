@@ -1,5 +1,11 @@
 import 'package:dio/dio.dart';
 
+
+// https://api.vvhan.com/     这里面提供了大量接口,可以方便代码调试.
+
+// 比如: 这个douban接口:  https://api.vvhan.com/douban.html
+
+
 class AppHomeApi {
 
   /**

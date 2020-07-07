@@ -1,5 +1,7 @@
 import 'dart:io';
+import 'dart:math';
 import 'package:flutter/cupertino.dart';
+import 'package:learn_flutter/views/shopCar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:provider/provider.dart';
 import 'package:provider/provider.dart';
@@ -52,7 +54,17 @@ class CatDetailPage extends StatefulWidget {
 
 }
 
+
+
 class CatDetailPageState extends State<CatDetailPage> {
+
+
+
+
+
+
+
+
 
   CatDetailPageState({
     Key key,
@@ -76,6 +88,10 @@ var a=1;
     if (mounted) setState(() {});
     _refreshController.loadComplete();
   }
+  GlobalKey floatKey = GlobalKey();
+  GlobalKey rootKey = GlobalKey();
+  Offset floatOffset ;
+  Offset temp;
   @override
   Widget build(BuildContext context) {
     return      // 这个地方应该用Notification报一下.
@@ -137,6 +153,8 @@ var a=1;
 //          physics: new NeverScrollableScrollPhysics(),
 
                   children: <Widget>[
+
+
                     Container(
                       height: 500, //让滑动
 
@@ -190,54 +208,43 @@ var a=1;
     child: Row(
         children: <Widget>[
 
-//
-//        Container(
-//    color: Colors.red,
-//    padding: EdgeInsets.all(5.0),
-//    )
-
-
-
-
-
-
 
 //
-//      Container(
-//        width: 10,
-//        height: 10,
-//        color: Colors.red,
-//      ),
-
-
-//      Consumer(builder: (BuildContext context,
-//          model, Widget child) {
-//        print('Text1重绘了。。。。。。');
+//          GestureDetector(
+//            onPanDown: (details){
+//              temp = new Offset(details.globalPosition.dx, details.globalPosition
+//                  .dy);
+//            },
+//            onTap: (){
+//              Function callback ;
+//               callback = (){ };
 //
-//        return Text(
-//          //获取数据
-//          'Text1 : ${model.value}',
-//          style: TextStyle(fontSize: 20),
-//        );
-//      }),
-
-//      Consumer<MyModel>( //写一个button
+//              setState(() {
+//                OverlayEntry entry = OverlayEntry(
+//                    builder: (ctx){
+//                      return ParabolaAnimateWidget(rootKey,temp,floatOffset,
+//                        Icon(Icons.cancel,color: Colors.greenAccent,),callback,);
+//                    }
+//                );
 //
-//          builder: (context, model, child) {
-//            return FloatingActionButton(
-//                onPressed: (){print(item['title']);model.addproduct(item['title']);},
-//                child: Text("购物车")
-//            );
-//          }),
-
-
-
-
-
-
-
-
-
+//
+//
+//                Overlay.of(rootKey.currentContext).insert(entry);
+//              });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//            },
+//
+//          ),
 
 
 
@@ -246,7 +253,26 @@ var a=1;
                 return FlatButton(
 
                     color: Colors.tealAccent,
-                    onPressed:(){Navigator.of(context).pushReplacementNamed("cart");},
+                    onPressed:(){
+
+
+
+
+                      Navigator.of(context).push( //路由跳转到.  CatDetailPage(item: item) 这个. //并且用的是page内部跳转.
+                          MaterialPageRoute(builder: (ctx) {
+                            var a=Application();
+
+                            return myViews3();
+                          })
+                      );  //要用栈push这个跳转.这个跳转是最应该使用的.符合逻辑,因为推出时候,不按照层次来推出,而是按照浏览记录来退出,符合我们的需求!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+//                      Navigator.of(context).pushReplacementNamed("cart");
+
+
+
+
+
+
+                    },
                     child:  Text("购物车"));
               },
             )

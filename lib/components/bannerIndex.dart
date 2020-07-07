@@ -45,8 +45,21 @@ class BannerIndexSwiper extends StatelessWidget { //仍然是一个widget
     );
   }
 
+
+
+
+
+
+
+
+
+
+
+
   Widget swiper() {
     return Swiper(  //swiper是一个插件. 配置点参数就能实现轮播
+        autoplayDisableOnInteraction : true,  //当手动操作时候停止autoplay
+      autoplay: true,   //让自己滚动
       itemBuilder: (BuildContext ctx, index) {
         return Container(
           child: ClipRRect(
@@ -72,6 +85,7 @@ class BannerIndexSwiper extends StatelessWidget { //仍然是一个widget
       viewportFraction: 0.8,
       scale: 0.9,
       pagination: new SwiperPagination(
+
         margin: EdgeInsets.only(top: 59)
       ),
     );
