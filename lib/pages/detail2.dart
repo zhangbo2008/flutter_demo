@@ -8,7 +8,7 @@ import 'package:provider/provider.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:add_cart_parabola/add_cart_parabola.dart';
+
 import '../app.dart';
 
 import 'dart:ui';
@@ -24,8 +24,6 @@ class CatDetailPage extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() {
-    print(item);
-    print('111111111111111111111111111111');
     return CatDetailPageState(item: item);
   }
 }
@@ -33,69 +31,33 @@ class CatDetailPage extends StatefulWidget {
 class CatDetailPageState extends State<CatDetailPage> {
   CatDetailPageState({Key key, this.item});
 
-
+  RefreshController _refreshController =
+      RefreshController(initialRefresh: false);
   var item;
 
-
-
-
-  Widget generateItem(int index){
-    Function callback ;
-
-
-    MediaQueryData queryData;
-    queryData = MediaQuery.of(context);
-    var w=queryData.size.width;
-    var h =queryData.size.height;
-    Offset temp;
-    temp = new Offset(w/2, h/2);
-    //GlobalKey itemKey = GlobalKey();
-
-
-
-    return RaisedButton(
-
-      color: Colors.blue,
-      child: Text("button"),
-      onPressed: (){
-        setState(() {
-          OverlayEntry entry = OverlayEntry(
-              builder: (ctx){
-                return ParabolaAnimateWidget(rootKey,Offset(300,300),Offset(10,10), Icon(Icons.cancel,color: Colors.greenAccent,),callback,);
-              }
-          );
-          Overlay.of(rootKey.currentContext).insert(entry);
-
-
-          callback = (status){
-            if(status == AnimationStatus.completed){
-              entry?.remove();
-            }
-          };
-        });
-
-      },
-    );
+  void _onRefresh() async {
+    // monitor network fetch
+    await Future.delayed(Duration(milliseconds: 1000));
+    // if failed,use refreshFailed()
+    print(111111111111111);
+    _refreshController.refreshToIdle(); //刷新上面.
   }
 
-
-
-
-
-
-
-
-
-
-
-
+  void _onLoading() async {
+    // monitor network fetch
+    await Future.delayed(Duration(milliseconds: 1000));
+    // if failed,use loadFailed(),if no data return,use LoadNodata()
+    var a = 1;
+    if (mounted) setState(() {});
+    _refreshController.loadComplete();
+  }
 
   //引入动画的记忆状态.
   GlobalKey floatKey = GlobalKey();
   GlobalKey rootKey = GlobalKey();
   GlobalKey rootKey2 = GlobalKey();
-  Offset floatOffset=new Offset(0, 0);
-Function callback;
+  Offset floatOffset;
+
   Offset temp;
 
   @override
@@ -111,10 +73,17 @@ Function callback;
     });
   }
 
+
+
   @override
   Widget build(BuildContext context) {
-    return    Scaffold(
+    return // 这个地方应该用Notification报一下.
 
+//        ChangeNotifierProvider<MyModel>( create: (context) => MyModel(),
+//    child:
+
+        Scaffold(
+      key: rootKey2,
       appBar: AppBar(
         title: Text("详情页"),
       ),
@@ -122,28 +91,54 @@ Function callback;
 //      Row(
 //        children: <Widget>[
 
-      Column(
+          Column(
         children: <Widget>[
+
+
 //            Container(
 //              height: 40.0,
 //              child: Text('sssssssssssssss'),
 //            ),
 
           Flexible(
-            // 在ListView上在包裹一层Flexible
+              // 在ListView上在包裹一层Flexible
+              child: SmartRefresher(
+            // 上下拉动都加载.包上一层上下刷新的组件.
+            enablePullDown: true,
+            enablePullUp: true,
+            header: WaterDropHeader(),
 
-
-
+            footer:
+                CustomFooter(builder: (BuildContext context, LoadStatus mode) {
+              Widget body;
+              if (mode == LoadStatus.idle) {
+              } else if (mode == LoadStatus.loading) {
+                body = CircularProgressIndicator();
+              } else if (mode == LoadStatus.failed) {
+                body = Text("加载失败");
+              } else if (mode == LoadStatus.canLoading) {
+                body = Text("加载更多");
+              } else {
+                body = Text("没有更多");
+              }
+              return Container(
+                height: 50.0,
+                child: Center(child: body),
+              );
+            }),
+            onRefresh: _onRefresh,
+            onLoading: _onLoading,
+            controller: _refreshController,
+            // 控制器
             child:
-            //下面是刷新的内容.组件是一个listview
-            ListView(
-
+                //下面是刷新的内容.组件是一个listview
+                ListView(
 //          physics: new NeverScrollableScrollPhysics(),
 
-                children: <Widget>[
+                    children: <Widget>[
                   Container(
                     height: 500, //让滑动
-                    key: rootKey2,
+
                     child: Image.network(item['info']['imgurl']),
                     decoration: BoxDecoration(color: Colors.yellow[50]),
                     padding: EdgeInsets.all(24),
@@ -157,9 +152,9 @@ Function callback;
                   ),
                   Text(item['info']['yanyuan'])
                 ]
-              //添加按钮.
-            ),
-          ),
+                    //添加按钮.
+                    ),
+          )),
 
           Container(
               padding: EdgeInsets.fromLTRB(
@@ -176,75 +171,37 @@ Function callback;
                         color: Colors.tealAccent,
                         onPressed: () {
                           Navigator.of(context).push(
-                            //路由跳转到.  CatDetailPage(item: item) 这个. //并且用的是page内部跳转.
+                              //路由跳转到.  CatDetailPage(item: item) 这个. //并且用的是page内部跳转.
                               MaterialPageRoute(builder: (ctx) {
-                                return myViews3();
-                              })); //要用栈push这个跳转.这个跳转是最应该使用的.符合逻辑,因为推出时候,不按照层次来推出,而是按照浏览记录来退出,符合我们的需求!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                            return myViews3();
+                          })); //要用栈push这个跳转.这个跳转是最应该使用的.符合逻辑,因为推出时候,不按照层次来推出,而是按照浏览记录来退出,符合我们的需求!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 //                      Navigator.of(context).pushReplacementNamed("cart");
                         },
-                        child: Icon(Icons.add_shopping_cart));
+                        child: Icon(Icons.add_shopping_cart)
+
+                    );
                   },
                 ),
                 SizedBox(
-                  width: 1,
+                  width: 120,
                 ), // 这个是padding 组件,用来拉开组件之间的距离
-//                generateItem(1),
-
-                RaisedButton(
-                  key: rootKey,
-                  color: Colors.blue,
-                  child: Text("button "),
-                  onPressed: (){
-                    setState(() {
-                      OverlayEntry entry = OverlayEntry(
-                          builder: (ctx){
-                            return ParabolaAnimateWidget(rootKey2,Offset(1,2),Offset(100,200), Icon(Icons.cancel,color: Colors.greenAccent,),callback,)
-                            ;
-                          }
-                      );
-                      Overlay.of(rootKey.currentContext).insert(entry);
-
-
-                       callback = (status){
-                        if(status == AnimationStatus.completed){
-                          entry?.remove();
-                        }
-                      };
-                    });
-                  },
-                ),
-
-
 
                 Consumer<MyModel>(//写一个button
 
                     builder: (context, model, child) {
-                      return FloatingActionButton(
-                        //FloatingActionButton 这个东西要少用,貌似一行只能用1个.写多了,页面渲染不了.
+                  return FloatingActionButton(
+                      //FloatingActionButton 这个东西要少用,貌似一行只能用1个.写多了,页面渲染不了.
 
 // onPressed 里面输入一个void callback, 所以他不能直接写函数.需要把盗用的写{}里面就行了.
-                          onPressed: () {
-                            print(item['title']);
-                            model.addproduct(item['title']);
+                      onPressed: () {
+                        print(item['title']);
+                        model.addproduct(item['title']);
 
-                            //做动画.
-                          },
-                          child: Text("购买"));
-                    }),
-
-
-              ])
-          )
-
-
-
-
-
-
-
-
-
-
+                        //做动画.
+                      },
+                      child: Text("购买"));
+                }),
+              ]))
         ],
       ),
     );

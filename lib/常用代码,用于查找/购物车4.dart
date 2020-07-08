@@ -1,5 +1,5 @@
 import 'dart:ui';
-
+// 做到了按钮相应,的抛物线动画
 
 import 'package:add_cart_parabola/add_cart_parabola.dart';
 import 'package:flutter/material.dart';
@@ -40,6 +40,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   GlobalKey floatKey = GlobalKey();
   GlobalKey rootKey = GlobalKey();
+  GlobalKey rootKey2 = GlobalKey();
   Offset floatOffset ;
 
   @override
@@ -56,21 +57,20 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
 
     return Scaffold(
+      key:rootKey2,
       appBar: AppBar(
 
         title: Text(widget.title),
       ),
       body: Container(
-        key: rootKey,
-        width: double.infinity,
-        height: double.infinity,
-        color: Colors.grey,
-        child: ListView(
-          children: List.generate(40, (index){
-            return generateItem(index);
-          }).toList(),
-        ),
+          key: rootKey,
+          width: double.infinity,
+          height: double.infinity,
+          color: Colors.grey,
+          child:  generateItem(1)
+
       ),
+
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.yellow,
         key: floatKey,
@@ -78,46 +78,55 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Icon(Icons.add),
       ),
     );
-
-
-
-
-
-
-
-
   }
   Widget generateItem(int index){
+    Function callback ;
 
+
+    MediaQueryData queryData;
+    queryData = MediaQuery.of(context);
+    var w=queryData.size.width;
+    var h =queryData.size.height;
+    Offset temp;
+    temp = new Offset(w/2, h/2);
     //GlobalKey itemKey = GlobalKey();
     Text text = Text("item $index",style: TextStyle(fontSize:
     25),);
 
 
-//    RaisedButton rb  = RaisedButton(
-//      key: itemKey,
-//      color: Colors.blue,
-//      child: Text("button $index"),
-//      onPressed: (){
-//        setState(() {
-//          OverlayEntry entry = OverlayEntry(
-//            builder: (ctx){
-//              return ParabolaAnimateWidget(rootKey,itemKey,floatKey);
-//            }
-//          );
-//          Overlay.of(rootKey.currentContext).insert(entry);
-//        });
-//
-//      },
-//    );
-    Offset temp;
+    return RaisedButton(
+
+      color: Colors.blue,
+      child: Text("button $index"),
+      onPressed: (){
+        setState(() {
+          OverlayEntry entry = OverlayEntry(
+              builder: (ctx){
+                return ParabolaAnimateWidget(rootKey2,temp,floatOffset, Icon(Icons.cancel,color: Colors.greenAccent,),callback,);
+              }
+          );
+          Overlay.of(rootKey.currentContext).insert(entry);
+
+
+          callback = (status){
+            if(status == AnimationStatus.completed){
+              entry?.remove();
+            }
+          };
+        });
+
+      },
+    );
+
+
+
+
     return GestureDetector(
       onPanDown: (details){
-        temp = new Offset(details.globalPosition.dx, details.globalPosition
-            .dy);
+        temp = new Offset(w/2, h/2);
       },
       onTap: (){
-        Function callback ;
+
         setState(() {
           OverlayEntry entry = OverlayEntry(
               builder: (ctx){
@@ -133,8 +142,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 ///duration： 动画时间 可选，默认1秒
                 ///
 
-                return ParabolaAnimateWidget(rootKey,temp,floatOffset,
-                    Icon(Icons.cancel,color: Colors.greenAccent,),callback,);
+                return ParabolaAnimateWidget(rootKey2,temp,floatOffset,
+                  Icon(Icons.cancel,color: Colors.greenAccent,),callback,);
               }
           );
 

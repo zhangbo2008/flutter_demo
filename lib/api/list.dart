@@ -17,7 +17,7 @@ class RandomListApi {
 
         var data = res.data;
       List _lists = data['data'];
-      print(_lists);
+//      print(_lists);
       return _lists;
     } catch(err) {
       return [];

@@ -19,7 +19,7 @@ void main() {
 
 //代码必须放main里面
   var a=new Counter(3);
-  print(a);
+//  print(a);
 }
 
 

@@ -8,7 +8,7 @@ void main(){
 
     if (!product.containsKey(a))
     {product[a]=0;}
-    print(product[a]);
+//    print(product[a]);
     product[a]+=1;
     print('你购买了');
     print(a);

@@ -30,8 +30,8 @@ class DouBanIndexComponent extends StatelessWidget {
   }
 
   Widget _dataList(context, List lists) {
-    print('看看数据');
-    print(lists);
+//    print('看看数据');
+//    print(lists);
     var _w = ScreenUtil.getScreenW(context);
     var itemW = _w * 168.5 / 360;
     List<Widget> listWrap = lists.map((item){ // 把每一个item 放入后面的函数中.得到一个迭代器.

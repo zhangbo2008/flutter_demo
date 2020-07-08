@@ -47,6 +47,15 @@ class HomeViewsState extends State<HomeViews> with AutomaticKeepAliveClientMixin
     return Container(
       child: ListView(
         children: <Widget>[
+
+
+
+
+
+
+
+
+
           BannerIndexSwiper(  //自己定义的组件.轮播器
             banners: _banners,
 

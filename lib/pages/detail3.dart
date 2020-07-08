@@ -8,7 +8,7 @@ import 'package:provider/provider.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:add_cart_parabola/add_cart_parabola.dart';
+
 import '../app.dart';
 
 import 'dart:ui';
@@ -95,7 +95,7 @@ class CatDetailPageState extends State<CatDetailPage> {
   GlobalKey rootKey = GlobalKey();
   GlobalKey rootKey2 = GlobalKey();
   Offset floatOffset=new Offset(0, 0);
-Function callback;
+
   Offset temp;
 
   @override
@@ -114,7 +114,7 @@ Function callback;
   @override
   Widget build(BuildContext context) {
     return    Scaffold(
-
+      key: rootKey2,
       appBar: AppBar(
         title: Text("详情页"),
       ),
@@ -122,7 +122,7 @@ Function callback;
 //      Row(
 //        children: <Widget>[
 
-      Column(
+          Column(
         children: <Widget>[
 //            Container(
 //              height: 40.0,
@@ -130,20 +130,20 @@ Function callback;
 //            ),
 
           Flexible(
-            // 在ListView上在包裹一层Flexible
+              // 在ListView上在包裹一层Flexible
 
 
 
             child:
-            //下面是刷新的内容.组件是一个listview
-            ListView(
-
+                //下面是刷新的内容.组件是一个listview
+                ListView(
+                  key: rootKey,
 //          physics: new NeverScrollableScrollPhysics(),
 
-                children: <Widget>[
+                    children: <Widget>[
                   Container(
                     height: 500, //让滑动
-                    key: rootKey2,
+
                     child: Image.network(item['info']['imgurl']),
                     decoration: BoxDecoration(color: Colors.yellow[50]),
                     padding: EdgeInsets.all(24),
@@ -157,8 +157,8 @@ Function callback;
                   ),
                   Text(item['info']['yanyuan'])
                 ]
-              //添加按钮.
-            ),
+                    //添加按钮.
+                    ),
           ),
 
           Container(
@@ -176,63 +176,34 @@ Function callback;
                         color: Colors.tealAccent,
                         onPressed: () {
                           Navigator.of(context).push(
-                            //路由跳转到.  CatDetailPage(item: item) 这个. //并且用的是page内部跳转.
+                              //路由跳转到.  CatDetailPage(item: item) 这个. //并且用的是page内部跳转.
                               MaterialPageRoute(builder: (ctx) {
-                                return myViews3();
-                              })); //要用栈push这个跳转.这个跳转是最应该使用的.符合逻辑,因为推出时候,不按照层次来推出,而是按照浏览记录来退出,符合我们的需求!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                            return myViews3();
+                          })); //要用栈push这个跳转.这个跳转是最应该使用的.符合逻辑,因为推出时候,不按照层次来推出,而是按照浏览记录来退出,符合我们的需求!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 //                      Navigator.of(context).pushReplacementNamed("cart");
                         },
                         child: Icon(Icons.add_shopping_cart));
                   },
                 ),
                 SizedBox(
-                  width: 1,
+                  width: 30,
                 ), // 这个是padding 组件,用来拉开组件之间的距离
-//                generateItem(1),
-
-                RaisedButton(
-                  key: rootKey,
-                  color: Colors.blue,
-                  child: Text("button "),
-                  onPressed: (){
-                    setState(() {
-                      OverlayEntry entry = OverlayEntry(
-                          builder: (ctx){
-                            return ParabolaAnimateWidget(rootKey2,Offset(1,2),Offset(100,200), Icon(Icons.cancel,color: Colors.greenAccent,),callback,)
-                            ;
-                          }
-                      );
-                      Overlay.of(rootKey.currentContext).insert(entry);
-
-
-                       callback = (status){
-                        if(status == AnimationStatus.completed){
-                          entry?.remove();
-                        }
-                      };
-                    });
-                  },
-                ),
-
-
-
+                  generateItem(1),
                 Consumer<MyModel>(//写一个button
 
                     builder: (context, model, child) {
-                      return FloatingActionButton(
-                        //FloatingActionButton 这个东西要少用,貌似一行只能用1个.写多了,页面渲染不了.
+                  return FloatingActionButton(
+                      //FloatingActionButton 这个东西要少用,貌似一行只能用1个.写多了,页面渲染不了.
 
 // onPressed 里面输入一个void callback, 所以他不能直接写函数.需要把盗用的写{}里面就行了.
-                          onPressed: () {
-                            print(item['title']);
-                            model.addproduct(item['title']);
+                      onPressed: () {
+                        print(item['title']);
+                        model.addproduct(item['title']);
 
-                            //做动画.
-                          },
-                          child: Text("购买"));
-                    }),
-
-
+                        //做动画.
+                      },
+                      child: Text("购买"));
+                }),
               ])
           )
 

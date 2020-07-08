@@ -24,7 +24,7 @@ class MyModel with ChangeNotifier{
   incrementCounter()  {
 
     counter++;
-    print(counter);
+//    print(counter);
     notifyListeners();
   }
 
@@ -33,7 +33,7 @@ class MyModel with ChangeNotifier{
 
    addproduct(String a) {
      print(11111111111111111);
-     print(product.isEmpty);
+//     print(product.isEmpty);
     print('你购买了');
     if (!product.containsKey(a))
     {product[a]=0;}

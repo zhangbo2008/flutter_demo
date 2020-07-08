@@ -1,4 +1,5 @@
 
+import 'package:add_cart_parabola/add_cart_parabola.dart';
 import 'package:flustars/flustars.dart';
 import 'package:flutter/material.dart';
 import 'package:giffy_dialog/giffy_dialog.dart';
@@ -13,7 +14,9 @@ class AboutDemoViews extends StatefulWidget {
 }
 
 class AboutDemoViewsState extends State<AboutDemoViews> {
-
+  GlobalKey floatKey = GlobalKey();
+  GlobalKey rootKey = GlobalKey();
+  GlobalKey rootKey2 = GlobalKey();
   List lists = [
     "公司简介",
     "公司信息",
@@ -33,7 +36,31 @@ class AboutDemoViewsState extends State<AboutDemoViews> {
             width: ScreenUtil.getScreenW(context),
             height: 120,
           ),
-          _render()
+          _render(),
+
+
+
+          RaisedButton(
+            key: rootKey,
+            color: Colors.blue,
+            child: Text("button "),
+            onPressed: (){
+              setState(() {
+                OverlayEntry entry = OverlayEntry(
+                    builder: (ctx){
+                      return ParabolaAnimateWidget(rootKey,Offset(1,2),Offset(100,200), Icon(Icons.cancel,color: Colors.greenAccent,),(){},)
+                      ;
+                    }
+                );
+                Overlay.of(rootKey.currentContext).insert(entry);
+
+
+
+              });
+            },
+          )
+
+
         ],
       ),
     );
